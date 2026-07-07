@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollGestionTiposQr"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7">
+
+    <LinearLayout
+        android:id="@+id/layoutGestionTiposQr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/txtTituloGestionTiposQr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipos de QR"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txtSubtituloGestionTiposQr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Administra los tipos de pago disponibles"
+            android:textSize="16sp"
+            android:textColor="#666666"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nuevo tipo de QR"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:layout_marginBottom="12dp" />
+
+        <EditText
+            android:id="@+id/edtNombreTipoQr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre del tipo de QR"
+            android:inputType="textCapWords"
+            android:layout_marginBottom="12dp" />
+
+        <EditText
+            android:id="@+id/edtDescripcionTipoQr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción"
+            android:inputType="textCapSentences"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnGuardarTipoQr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar tipo de QR"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipos registrados"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:layout_marginBottom="12dp" />
+
+        <LinearLayout
+            android:id="@+id/contenedorListaTiposQr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+
+</ScrollView>
