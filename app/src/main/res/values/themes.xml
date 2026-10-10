@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.ContainerQR" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:colorAccent">@color/primary</item>
+        <item name="android:statusBarColor">@color/surface_app</item>
+        <item name="android:navigationBarColor">@color/surface_app</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowBackground">@color/surface_app</item>
+    </style>
+    <style name="Theme.ContainerQR" parent="Base.Theme.ContainerQR" />
+</resources>

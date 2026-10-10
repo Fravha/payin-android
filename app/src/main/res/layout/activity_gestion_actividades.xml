@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollGestionActividades"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7">
+
+    <LinearLayout
+        android:id="@+id/layoutGestionActividades"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/txtTituloGestionActividades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Actividades"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txtSubtituloGestionActividades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Administra las actividades disponibles"
+            android:textSize="16sp"
+            android:textColor="#666666"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nueva actividad"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:layout_marginBottom="12dp" />
+
+        <EditText
+            android:id="@+id/edtNombreActividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre de la actividad"
+            android:inputType="textCapWords"
+            android:layout_marginBottom="12dp" />
+
+        <EditText
+            android:id="@+id/edtDescripcionActividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción"
+            android:inputType="textCapSentences"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnGuardarActividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar actividad"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Actividades registradas"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:layout_marginBottom="12dp" />
+
+        <LinearLayout
+            android:id="@+id/contenedorListaActividades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+
+</ScrollView>

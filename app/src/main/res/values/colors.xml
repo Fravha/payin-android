@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#315CDB</color>
+    <color name="primary_dark">#2346B5</color>
+    <color name="surface_app">#F6F7FB</color>
+    <color name="surface_card">#FFFFFFFF</color>
+    <color name="text_primary">#172033</color>
+    <color name="text_secondary">#68738A</color>
+    <color name="border">#E1E6F0</color>
+    <color name="icon_lavender">#E9EDFF</color>
+    <color name="icon_peach">#FFF0E5</color>
+</resources>

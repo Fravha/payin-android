@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutMostrarQr"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F7F4"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="22dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="22dp"
+        android:paddingBottom="28dp">
+
+        <TextView
+            android:id="@+id/txtTituloQr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tu código QR"
+            android:textColor="#18251D"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            android:letterSpacing="-0.02"
+            android:gravity="center"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/txtDetalleQr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Actividad - Tipo de QR"
+            android:textColor="#657168"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:lineSpacingExtra="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingStart="18dp"
+            android:paddingTop="22dp"
+            android:paddingEnd="18dp"
+            android:paddingBottom="20dp"
+            android:background="@drawable/bg_payin_qr_card"
+            android:elevation="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CÓDIGO QR"
+                android:textColor="#168447"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.12"
+                android:layout_marginBottom="16dp" />
+
+            <ImageView
+                android:id="@+id/imgQr"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:background="#FFFFFF"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="Imagen del código QR" />
+
+            <TextView
+                android:id="@+id/txtMensajeQr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buscando QR..."
+                android:textColor="#657168"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:lineSpacingExtra="3dp"
+                android:layout_marginTop="18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="14dp"
+            android:paddingTop="13dp"
+            android:paddingEnd="14dp"
+            android:paddingBottom="13dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_payin_qr_tip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✓"
+                android:textColor="#168447"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Escanea el código con la cámara de tu teléfono o con tu aplicación de pagos."
+                android:textColor="#326044"
+                android:textSize="12sp"
+                android:lineSpacingExtra="3dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Payin · by Bylaba Projects"
+            android:textColor="#929D94"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="8dp" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutConfig"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#F7F7F7">
+
+    <TextView
+        android:id="@+id/txtTituloConfig"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Configuración"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#222222"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/txtSubtituloConfig"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Administración de Container QR"
+        android:textSize="16sp"
+        android:textColor="#666666"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/btnGestionActividades"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Administrar actividades"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <Button
+        android:id="@+id/btnGestionTiposQr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Administrar tipos de QR"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <Button
+        android:id="@+id/btnGestionQrs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Administrar imágenes QR"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <Button
+        android:id="@+id/btnCambiarPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cambiar contraseña"
+        android:textAllCaps="false"
+        android:textSize="16sp" />
+
+</LinearLayout>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#635BDB">
+  <title>Payin — Mockup V2 | Bylaba Projects</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <style>
+    :root{
+      --primary:#168447;--primary-dark:#106B38;--primary-soft:#E4F5E9;
+      --app-bg:#F4F5FA;--surface:#FFFFFF;--surface-soft:#F8F8FC;
+      --text:#202136;--muted:#777A91;--border:#E8E8F1;
+      --success:#16866A;--danger:#C94A5A;--shadow:0 24px 70px rgba(38,35,86,.15);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(circle at 20% 10%,#E5F6EA 0,transparent 32%),#F5F8F5;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    .stage{min-height:100vh;padding:36px 18px;display:flex;flex-direction:column;align-items:center;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-mark{width:42px;height:42px;border-radius:14px;background:var(--primary);color:#fff;display:grid;place-items:center;font-size:25px;box-shadow:0 8px 20px #16844740}
+    .brand-name{font-size:24px;font-weight:800;letter-spacing:-.8px}
+    .brand-by{font-size:11px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+    .workspace{width:min(100%,430px)}
+    .caption{font-size:12px;color:var(--muted);text-align:center;margin:0 0 14px}
+    .phone{width:100%;min-height:720px;background:var(--surface);border:1px solid #E1E1EB;border-radius:32px;overflow:hidden;box-shadow:var(--shadow);position:relative;display:flex;flex-direction:column}
+    .status{height:26px;padding:7px 23px 0;display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:#36364B;background:#fff}
+    .topbar{min-height:68px;padding:12px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);background:#fff}
+    .icon-btn{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--border);border-radius:13px;background:#fff;color:var(--text);font-size:21px;flex-shrink:0}
+    .icon-btn:hover{background:var(--primary-soft);color:var(--primary)}
+    .top-title{font-size:16px;font-weight:750;letter-spacing:-.3px;line-height:1.25}
+    .top-subtitle{font-size:11px;color:var(--muted);margin-top:3px}
+    main{padding:22px 20px 28px;flex:1;background:linear-gradient(180deg,#fff 0%,#FCFCFF 100%)}
+    .eyebrow{font-size:11px;font-weight:750;color:var(--primary);text-transform:uppercase;letter-spacing:1.3px;margin:0 0 9px}
+    h1{font-size:25px;letter-spacing:-.9px;line-height:1.16;margin:0 0 8px}
+    .lead{font-size:13px;line-height:1.55;color:var(--muted);margin:0 0 22px}
+    .section-row{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}
+    .section-row strong{font-size:13px}
+    .tiny-label{font-size:11px;color:var(--muted)}
+    .activity-card,.option-card,.settings-row{width:100%;display:flex;align-items:center;text-align:left;gap:13px;padding:15px;border:1px solid var(--border);background:#fff;border-radius:18px;color:var(--text);margin-bottom:11px;transition:.15s ease}
+    .activity-card:hover,.option-card:hover,.settings-row:hover{border-color:#A8DDB8;box-shadow:0 8px 22px #16844712;transform:translateY(-1px)}
+    .activity-icon{width:49px;height:49px;border-radius:15px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center;font-size:24px;flex-shrink:0}
+    .card-copy{flex:1;min-width:0}
+    .card-title{font-size:14px;font-weight:750;margin-bottom:4px}
+    .card-desc{font-size:11px;line-height:1.4;color:var(--muted)}
+    .chevron{color:#A0A1B4;font-size:19px}
+    .tip{margin-top:19px;padding:13px 14px;border-radius:15px;background:#F6F5FF;display:flex;gap:10px;align-items:flex-start;color:#5148A7;font-size:11px;line-height:1.5}
+    .tip i{font-size:18px;flex-shrink:0}
+    .bottom{border-top:1px solid var(--border);padding:12px 18px 16px;display:flex;align-items:center;justify-content:space-between;background:#fff}
+    .bottom-brand{display:flex;align-items:center;gap:7px;font-size:10px;color:var(--muted)}
+    .bottom-brand i{color:var(--primary);font-size:17px}
+    .version{font-size:10px;color:#A0A1B4}
+    .drawer-overlay{position:absolute;inset:26px 0 0;background:#17172B70;z-index:5;display:none}
+    .drawer-overlay.open{display:block}
+    .drawer{width:278px;max-width:84%;height:100%;background:#fff;padding:20px 14px;box-shadow:14px 0 36px #19193420;animation:slide .16s ease}
+    @keyframes slide{from{transform:translateX(-12px);opacity:.6}to{transform:translateX(0);opacity:1}}
+    .drawer-brand{display:flex;align-items:center;gap:10px;padding:4px 7px 22px;border-bottom:1px solid var(--border);margin-bottom:15px}
+    .drawer-brand .brand-mark{width:38px;height:38px;border-radius:12px;font-size:22px}
+    .drawer-brand .brand-name{font-size:21px}
+    .menu-label{font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:1.3px;color:#A0A1B4;padding:10px 10px}
+    .menu-item{width:100%;display:flex;align-items:center;gap:12px;border:0;background:transparent;padding:13px 12px;border-radius:12px;text-align:left;color:#5D6076;font-size:13px;font-weight:650}
+    .menu-item i{font-size:20px}
+    .menu-item.active,.menu-item:hover{background:var(--primary-soft);color:var(--primary)}
+    .drawer-footer{position:absolute;bottom:18px;left:18px;right:18px;border-top:1px solid var(--border);padding-top:15px;color:var(--muted);font-size:10px;line-height:1.6}
+    .backline{display:flex;align-items:center;gap:8px;margin-bottom:20px}
+    .backline button{border:0;background:var(--primary-soft);color:var(--primary);width:32px;height:32px;border-radius:10px;font-size:18px}
+    .backline span{font-size:12px;color:var(--muted)}
+    .option-card{padding:14px}
+    .option-card .activity-icon{width:44px;height:44px;border-radius:13px;font-size:21px}
+    .qr-panel{border:1px solid var(--border);background:#fff;border-radius:22px;padding:20px 16px;text-align:center}
+    .qr-placeholder{width:190px;height:190px;max-width:100%;margin:0 auto 17px;background:#fff;border:1px solid var(--border);border-radius:15px;display:grid;place-items:center;color:#292A3D}
+    .qr-placeholder i{font-size:112px}
+    .qr-note{font-size:11px;color:var(--muted);line-height:1.5;margin:8px 0 0}
+    .pill{display:inline-flex;align-items:center;gap:5px;background:var(--primary-soft);color:var(--primary);border-radius:999px;padding:6px 10px;font-size:10px;font-weight:750;margin-bottom:12px}
+    .primary-btn,.secondary-btn{width:100%;border:0;border-radius:13px;padding:13px 15px;font-size:12px;font-weight:750;display:flex;align-items:center;justify-content:center;gap:8px}
+    .primary-btn{background:var(--primary);color:#fff;box-shadow:0 6px 15px #16844735}
+    .primary-btn:hover{background:var(--primary-dark)}
+    .secondary-btn{background:#fff;color:var(--text);border:1px solid var(--border);margin-top:9px}
+    .settings-row{padding:14px;margin-bottom:10px}
+    .settings-row .activity-icon{width:42px;height:42px;font-size:20px}
+    .field{display:block;font-size:11px;font-weight:700;color:#55586E;margin:15px 0 7px}
+    input,select{width:100%;padding:12px;border:1px solid #DEDFEA;border-radius:12px;background:#fff;color:var(--text);outline:none;font-size:12px}
+    input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px #16844718}
+    .form-card{border:1px solid var(--border);border-radius:17px;padding:15px;margin-bottom:12px}
+    .form-card h3{font-size:13px;margin:0 0 4px}
+    .form-card p{font-size:11px;color:var(--muted);line-height:1.5;margin:0 0 10px}
+    .about-card{text-align:center;padding:24px 17px;border:1px solid var(--border);border-radius:22px;background:linear-gradient(160deg,#EDF8F0,#fff 70%)}
+    .about-mark{width:74px;height:74px;background:var(--primary);color:#fff;border-radius:23px;display:grid;place-items:center;margin:0 auto 15px;font-size:39px;box-shadow:0 12px 25px #16844740}
+    .about-card h2{font-size:24px;letter-spacing:-.7px;margin:0 0 5px}
+    .about-card .tagline{font-size:12px;color:var(--muted);margin:0 0 18px}
+    .about-meta{border-top:1px solid var(--border);padding-top:15px;margin-top:17px;font-size:11px;color:var(--muted);line-height:1.8}
+    .toast{position:absolute;left:18px;right:18px;bottom:65px;padding:12px 14px;background:#24243A;color:white;border-radius:12px;font-size:12px;box-shadow:0 10px 25px #0002;display:none;z-index:20}
+    .toast.show{display:block}
+    @media(max-width:480px){.stage{padding:0;background:#fff;gap:0}.workspace{width:100%}.caption{display:none}.phone{min-height:100vh;border:0;border-radius:0;box-shadow:none}.status{padding-top:8px;height:30px}.drawer-overlay{inset:30px 0 0}main{padding-top:24px}}
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="brand">
+      <div class="brand-mark"><i class="ti ti-qrcode" aria-hidden="true"></i></div>
+      <div><div class="brand-name">Payin</div><div class="brand-by">by Bylaba Projects</div></div>
+    </div>
+    <div class="workspace">
+      <p class="caption">Mockup interactivo · Payin V2 · La interfaz es una propuesta visual, no una app conectada a SQLite.</p>
+      <div class="phone">
+        <div class="status"><span>9:41</span><span><i class="ti ti-wifi"></i> &nbsp; <i class="ti ti-battery-4"></i></span></div>
+        <header class="topbar" id="header"></header>
+        <main id="content"></main>
+        <footer class="bottom"><div class="bottom-brand"><i class="ti ti-qrcode"></i><span>Payin <b>·</b> Bylaba Projects</span></div><span class="version">Vista previa V2</span></footer>
+        <div class="drawer-overlay" id="drawerOverlay" onclick="closeMenu(event)">
+          <nav class="drawer" aria-label="Menú principal" onclick="event.stopPropagation()">
+            <div class="drawer-brand"><div class="brand-mark"><i class="ti ti-qrcode"></i></div><div><div class="brand-name">Payin</div><div class="brand-by">BYLABA PROJECTS</div></div></div>
+            <div class="menu-label">Navegación</div>
+            <button class="menu-item active" onclick="goTo('main')"><i class="ti ti-home-2"></i>Inicio</button>
+            <button class="menu-item" onclick="goTo('config')"><i class="ti ti-settings"></i>Configuración</button>
+            <button class="menu-item" onclick="goTo('about')"><i class="ti ti-info-circle"></i>Acerca de Payin</button>
+            <div class="drawer-footer">Payin<br>Una solución de Bylaba Projects</div>
+          </nav>
+        </div>
+        <div class="toast" id="toast" role="status"></div>
+      </div>
+    </div>
+  </div>
+<script>
+  const state={screen:'main',activity:null,type:null};
+  // Datos de ejemplo únicamente para visualizar la interfaz.
+  // En Android, las actividades y tipos reales seguirán viniendo de SQLite.
+  const activities=[
+    {id:1,name:'Actividad de ejemplo',description:'Organiza los códigos QR de esta actividad',icon:'ti-grid-dots'},
+    {id:2,name:'Otra actividad',description:'Un segundo ejemplo configurable',icon:'ti-building-store'}
+  ];
+  const types=[
+    {name:'Tipo de QR principal',description:'Código QR para esta opción',icon:'ti-qrcode'},
+    {name:'Tipo de QR secundario',description:'Otra variante de código QR',icon:'ti-file-description'}
+  ];
+  function showToast(message){const t=document.getElementById('toast');t.textContent=message;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+  function openMenu(){document.getElementById('drawerOverlay').classList.add('open')}
+  function closeMenu(e){if(!e||e.target.id==='drawerOverlay')document.getElementById('drawerOverlay').classList.remove('open')}
+  function goTo(screen){state.screen=screen;closeMenu();render()}
+  function back(){if(state.screen==='qr')state.screen='types';else if(state.screen==='types')state.screen='main';else if(state.screen==='configImages'||state.screen==='configActivities')state.screen='config';else state.screen='main';render()}
+  function selectActivity(id){state.activity=activities.find(a=>a.id===id);state.type=null;state.screen='types';render()}
+  function selectType(name){state.type=types.find(t=>t.name===name);state.screen='qr';render()}
+  function backButton(){return `<button class="icon-btn" onclick="back()" aria-label="Volver"><i class="ti ti-arrow-left"></i></button>`}
+  function render(){
+    const header=document.getElementById('header'),content=document.getElementById('content');
+    let title='Payin',subtitle='by Bylaba Projects',body='';
+    const backScreens=['types','qr','configActivities','configImages'];
+    if(state.screen==='main'){
+      title='Payin';subtitle='by Bylaba Projects';
+      body=`<p class="eyebrow">Bienvenido</p><h1>Tus actividades,<br>en un solo lugar.</h1><p class="lead">Selecciona una actividad para encontrar el código QR que necesitas.</p>
+      <div class="section-row"><strong>Actividades</strong><span class="tiny-label">${activities.length} disponibles</span></div>
+      ${activities.map(a=>`<button class="activity-card" onclick="selectActivity(${a.id})"><span class="activity-icon"><i class="ti ${a.icon}"></i></span><span class="card-copy"><span class="card-title" style="display:block">${a.name}</span><span class="card-desc">${a.description}</span></span><i class="ti ti-chevron-right chevron"></i></button>`).join('')}
+      <div class="tip"><i class="ti ti-sparkles"></i><span>Payin se adapta a tus necesidades. Las actividades y sus tipos de QR se configuran desde el menú.</span></div>`;
+    }else if(state.screen==='types'){
+      title=state.activity?state.activity.name:'Actividad';subtitle='Selecciona un tipo de QR';
+      body=`<div class="backline"><button onclick="back()" aria-label="Volver"><i class="ti ti-arrow-left"></i></button><span>Actividades / ${state.activity.name}</span></div><p class="eyebrow">Siguiente paso</p><h1>¿Qué QR necesitas?</h1><p class="lead">Elige una opción para visualizar su código.</p>
+      ${types.map(t=>`<button class="option-card" onclick="selectType('${t.name}')"><span class="activity-icon"><i class="ti ${t.icon}"></i></span><span class="card-copy"><span class="card-title" style="display:block">${t.name}</span><span class="card-desc">${t.description}</span></span><i class="ti ti-chevron-right chevron"></i></button>`).join('')}`;
+    }else if(state.screen==='qr'){
+      title='Código QR';subtitle=state.activity.name;
+      body=`<div class="backline"><button onclick="back()" aria-label="Volver"><i class="ti ti-arrow-left"></i></button><span>${state.activity.name} / ${state.type.name}</span></div><div class="qr-panel"><span class="pill"><i class="ti ti-circle-check"></i> QR seleccionado</span><div class="qr-placeholder"><i class="ti ti-qrcode"></i></div><h2 style="font-size:16px;margin:0 0 5px">${state.activity.name}</h2><div style="font-size:12px;color:var(--muted)">${state.type.name}</div><p class="qr-note">Vista de ejemplo. La versión Android mostrará aquí la imagen QR guardada para esta opción.</p></div><div style="margin-top:15px"><button class="primary-btn" onclick="showToast('Acción de ejemplo: ver imagen QR')"><i class="ti ti-maximize"></i>Ver código</button><button class="secondary-btn" onclick="showToast('La acción de compartir se implementará en Android')"><i class="ti ti-share-3"></i>Compartir</button></div>`;
+    }else if(state.screen==='config'){
+      title='Configuración';subtitle='Personaliza tu experiencia';
+      body=`<p class="eyebrow">Administración</p><h1>Configura Payin<br>a tu manera.</h1><p class="lead">Gestiona las opciones que aparecerán en la pantalla principal.</p>
+      <button class="settings-row" onclick="goTo('configActivities')"><span class="activity-icon"><i class="ti ti-category-2"></i></span><span class="card-copy"><span class="card-title" style="display:block">Actividades y tipos de QR</span><span class="card-desc">Organiza las categorías disponibles</span></span><i class="ti ti-chevron-right chevron"></i></button>
+      <button class="settings-row" onclick="goTo('configImages')"><span class="activity-icon"><i class="ti ti-photo"></i></span><span class="card-copy"><span class="card-title" style="display:block">Imágenes QR</span><span class="card-desc">Asocia una imagen a cada tipo de QR</span></span><i class="ti ti-chevron-right chevron"></i></button>
+      <div class="tip"><i class="ti ti-lock"></i><span>En la aplicación Android, el acceso a configuración continuará protegido por contraseña.</span></div>`;
+    }else if(state.screen==='configActivities'){
+      title='Actividades y tipos';subtitle='Contenido configurable';
+      body=`<div class="backline"><button onclick="back()" aria-label="Volver"><i class="ti ti-arrow-left"></i></button><span>Configuración</span></div><h1>Actividades</h1><p class="lead">Estos datos son ejemplos del mockup; no modifican tu base SQLite.</p>${activities.map(a=>`<div class="form-card"><h3>${a.name}</h3><p>${a.description}</p><button class="secondary-btn" onclick="showToast('Edición de ejemplo; no guarda datos')"><i class="ti ti-pencil"></i>Editar actividad</button></div>`).join('')}<button class="primary-btn" onclick="showToast('La creación se realiza en la app Android')"><i class="ti ti-plus"></i>Agregar actividad</button><div class="section-row"><strong>Tipos de QR</strong></div>${types.map(t=>`<div class="form-card"><h3>${t.name}</h3><p>${t.description}</p></div>`).join('')}`;
+    }else if(state.screen==='configImages'){
+      title='Imágenes QR';subtitle='Asociación de imágenes';
+      body=`<div class="backline"><button onclick="back()" aria-label="Volver"><i class="ti ti-arrow-left"></i></button><span>Configuración</span></div><p class="eyebrow">Biblioteca de QR</p><h1>Gestiona tus imágenes.</h1><p class="lead">Asocia una imagen QR a la combinación de actividad y tipo correspondiente.</p><label class="field" for="activitySelect">Actividad</label><select id="activitySelect">${activities.map(a=>`<option>${a.name}</option>`).join('')}</select><label class="field" for="typeSelect">Tipo de QR</label><select id="typeSelect">${types.map(t=>`<option>${t.name}</option>`).join('')}</select><div class="form-card" style="margin-top:16px;text-align:center;padding:22px"><i class="ti ti-cloud-upload" style="font-size:34px;color:var(--primary)"></i><p style="margin:9px 0 14px">Selecciona una imagen para representar esta combinación.</p><button class="secondary-btn" onclick="showToast('La carga real de imágenes se implementará en Android')"><i class="ti ti-upload"></i>Seleccionar imagen</button></div><button class="primary-btn" onclick="showToast('Configuración de ejemplo; no se guardaron cambios')"><i class="ti ti-device-floppy"></i>Guardar asociación</button>`;
+    }else if(state.screen==='about'){
+      title='Acerca de Payin';subtitle='Información de la aplicación';
+      body=`<div class="about-card"><div class="about-mark"><i class="ti ti-qrcode"></i></div><h2>Payin</h2><p class="tagline">Tus códigos QR, organizados.</p><span class="pill"><i class="ti ti-sparkles"></i>Concepto V2</span><div class="about-meta"><b style="color:var(--text)">Desarrollado por Bylaba Projects</b><br>Versión de referencia 2.0<br><br>Una aplicación configurable para organizar actividades, tipos de QR e imágenes.</div></div><div class="tip"><i class="ti ti-heart-handshake"></i><span>Diseñado para adaptarse a diferentes usos y negocios, sin depender de una actividad específica.</span></div>`;
+    }
+    const isBack=backScreens.includes(state.screen);
+    header.innerHTML=(isBack?backButton():`<button class="icon-btn" onclick="openMenu()" aria-label="Abrir menú"><i class="ti ti-menu-2"></i></button>`)+`<div style="min-width:0;flex:1"><div class="top-title">${title}</div><div class="top-subtitle">${subtitle}</div></div>`+(state.screen==='main'?`<div class="brand-mark" style="width:36px;height:36px;border-radius:12px;font-size:20px"><i class="ti ti-qrcode"></i></div>`:'');
+    content.innerHTML=body;
+  }
+  render();
+</script>
+</body>
+</html>
