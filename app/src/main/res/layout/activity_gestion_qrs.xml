@@ -3,88 +3,229 @@
     android:id="@+id/layoutGestionQrs"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F7F7">
+    android:background="#F4F7F5"
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    android:paddingBottom="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingStart="20dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:letterSpacing="0.10"
+            android:text="ADMINISTRACIÓN"
+            android:textColor="#168447"
+            android:textSize="11sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtTituloGestionQrs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Gestión de QR"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="#222222"
+            android:layout_marginBottom="7dp"
+            android:text="Gestionar código QR"
+            android:textColor="#202136"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:lineSpacingExtra="3dp"
+            android:text="Asocia una imagen QR a cada actividad y tipo de pago."
+            android:textColor="#777A91"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_payin_qr_card"
+            android:elevation="1dp"
+            android:orientation="vertical"
+            android:padding="17dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="Configuración del pago"
+                android:textColor="#202136"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="Selecciona a qué opción pertenecerá el código."
+                android:textColor="#777A91"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="Actividad"
+                android:textColor="#55586E"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinnerActividades"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/bg_payin_field"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="Tipo de QR"
+                android:textColor="#55586E"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinnerTiposQr"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_payin_field"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_payin_qr_card"
+            android:elevation="1dp"
+            android:orientation="vertical"
+            android:padding="17dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Imagen del QR"
+                    android:textColor="#202136"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_payin_qr_tip"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="VISTA PREVIA"
+                    android:textColor="#106B38"
+                    android:textSize="9sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp"
+                android:text="Carga la imagen que verá el usuario al realizar el pago."
+                android:textColor="#777A91"
+                android:textSize="12sp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="14dp"
+                android:background="@drawable/bg_payin_qr_preview"
+                android:padding="14dp">
+
+                <ImageView
+                    android:id="@+id/imgPreviewQr"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="Vista previa del código QR"
+                    android:scaleType="fitCenter" />
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/btnSeleccionarImagen"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_payin_button_secondary"
+                android:backgroundTint="@null"
+                android:minHeight="0dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:text="＋  Cargar imagen QR"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnGuardarQr"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_payin_button_primary"
+                android:backgroundTint="@null"
+                android:minHeight="0dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:text="Guardar / Actualizar QR"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtEstadoQr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_payin_qr_tip"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="2dp"
+                android:padding="12dp"
+                android:text="Seleccione una actividad y tipo QR."
+                android:textColor="#106B38"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:gravity="center"
-            android:layout_marginBottom="24dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Actividad"
-            android:textSize="15sp"
-            android:textColor="#444444"
-            android:layout_marginBottom="6dp" />
-
-        <Spinner
-            android:id="@+id/spinnerActividades"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="18dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tipo de QR"
-            android:textSize="15sp"
-            android:textColor="#444444"
-            android:layout_marginBottom="6dp" />
-
-        <Spinner
-            android:id="@+id/spinnerTiposQr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="22dp" />
-
-        <ImageView
-            android:id="@+id/imgPreviewQr"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_gravity="center_horizontal"
-            android:background="#E0E0E0"
-            android:padding="16dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="Vista previa del código QR"
-            android:layout_marginBottom="20dp" />
-
-        <Button
-            android:id="@+id/btnSeleccionarImagen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cargar imagen QR"
-            android:layout_marginBottom="12dp" />
-
-        <Button
-            android:id="@+id/btnGuardarQr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Guardar / Actualizar QR"
-            android:layout_marginBottom="12dp" />
-
-        <TextView
-            android:id="@+id/txtEstadoQr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Seleccione una actividad y tipo QR."
-            android:textSize="14sp"
-            android:textColor="#555555"
-            android:gravity="center"
-            android:layout_marginTop="8dp" />
+            android:text="Payin  ·  by Bylaba Projects"
+            android:textColor="#777A91"
+            android:textSize="11sp" />
 
     </LinearLayout>
-
 </ScrollView>

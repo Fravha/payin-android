@@ -55,6 +55,24 @@ public class GestionQrsActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_gestion_qrs);
 
+        ViewCompat.setOnApplyWindowInsetsListener(
+                findViewById(R.id.layoutGestionQrs),
+                (view, windowInsets) -> {
+                    Insets insets = windowInsets.getInsets(
+                            WindowInsetsCompat.Type.systemBars()
+                    );
+
+                    view.setPadding(
+                            view.getPaddingLeft(),
+                            insets.top,
+                            view.getPaddingRight(),
+                            insets.bottom
+                    );
+
+                    return windowInsets;
+                }
+        );
+
         spinnerActividades = findViewById(R.id.spinnerActividades);
         spinnerTiposQr = findViewById(R.id.spinnerTiposQr);
         imgPreviewQr = findViewById(R.id.imgPreviewQr);
