@@ -6,10 +6,10 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:fitsSystemWindows="false"
+    android:background="@color/surface_app"
     tools:context=".MainActivity">
 
-    <!-- Contenido principal -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -21,9 +21,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingStart="24dp"
-            android:paddingTop="28dp"
-            android:paddingEnd="24dp"
+            android:paddingStart="22dp"
+            android:paddingTop="24dp"
+            android:paddingEnd="22dp"
             android:paddingBottom="20dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:letterSpacing="0.08"
-                        android:text="PAGOS RÁPIDOS"
+                        android:text="Payin"
                         android:textColor="@color/primary"
                         android:textSize="11sp"
                         android:textStyle="bold" />
@@ -55,15 +55,13 @@
                         android:id="@+id/txtTitulo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="¿Qué vas a cobrar?"
+                        android:layout_marginTop="6dp"
+                        android:text="Tus actividades"
                         android:textColor="@color/text_primary"
-                        android:textSize="27sp"
+                        android:textSize="28sp"
                         android:textStyle="bold" />
-
                 </LinearLayout>
 
-                <!-- Botón temporal: luego lo convertiremos en menú -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnConfiguracion"
                     style="@style/Widget.Material3.Button.OutlinedButton"
@@ -74,23 +72,24 @@
                     android:insetBottom="0dp"
                     android:minWidth="0dp"
                     android:padding="0dp"
-                    android:text="☰"
-                    android:textColor="@color/text_primary"
-                    android:textSize="22sp"
+                    android:text=""
+                    app:icon="@drawable/ic_hero_bars_3"
+                    app:iconTint="@color/text_primary"
+                    app:iconSize="24dp"
+                    app:iconGravity="textStart"
                     app:cornerRadius="16dp"
                     app:strokeColor="@color/border" />
-
             </LinearLayout>
 
             <TextView
                 android:id="@+id/txtSubtitulo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Selecciona el área del negocio para mostrar su QR."
+                android:layout_marginTop="9dp"
+                android:text="Elige una actividad para consultar sus códigos QR."
                 android:textColor="@color/text_secondary"
-                android:textSize="14sp" />
-
+                android:textSize="14sp"
+                android:lineSpacingExtra="2dp" />
         </LinearLayout>
 
         <ScrollView
@@ -99,11 +98,11 @@
             android:layout_height="0dp"
             android:clipToPadding="false"
             android:fillViewport="true"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:paddingBottom="24dp"
+            android:paddingStart="22dp"
+            android:paddingEnd="22dp"
+            android:paddingBottom="20dp"
             app:layout_constraintTop_toBottomOf="@id/header"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/txtMarcaAgua"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
@@ -112,20 +111,57 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
-
         </ScrollView>
+
+        <TextView
+            android:id="@+id/txtMarcaAgua"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/app_tagline"
+            android:textColor="#929D94"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="12dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginEnd="22dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Menú lateral -->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationView"
+    <LinearLayout
+        android:id="@+id/drawerPanel"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:menu="@menu/menu_principal"
-        app:itemIconTint="@color/primary"
-        app:itemTextColor="@color/text_primary" />
+        android:orientation="vertical"
+        android:background="@color/surface_app">
 
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fitsSystemWindows="false"
+            android:background="@color/surface_app"
+            app:headerLayout="@layout/nav_header_containerqr"
+            app:menu="@menu/menu_principal"
+            app:itemBackground="@drawable/bg_nav_item"
+            app:itemIconTint="@color/nav_item_tint"
+            app:itemTextColor="@color/nav_item_text" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/brand_footer"
+            android:textColor="#929D94"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="20dp"
+            android:background="@color/surface_app" />
+
+    </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

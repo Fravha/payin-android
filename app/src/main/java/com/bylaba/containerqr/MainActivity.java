@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.graphics.Typeface;
 import android.graphics.Color;
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
+    private View drawerPanel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigationView);
+        drawerPanel = findViewById(R.id.drawerPanel);
 
         // Inicializamos el DAO
         actividadDAO = new ActividadDAO(this);
@@ -72,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Cargamos actividades desde SQLite
         cargarActividades();
-        configurarBotonConfiguracion();
         configurarMenuLateral();
 
         TipoQrDAO tipoQrDAO = new TipoQrDAO(this);
@@ -82,12 +85,39 @@ public class MainActivity extends AppCompatActivity {
             Log.d("ContainerQR", "Tipo QR: " + tipo.getNombre());
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        ViewCompat.setOnApplyWindowInsetsListener(
+                findViewById(R.id.main), (v, insets) -> {
+                    Insets systemBars = insets.getInsets(
+                            WindowInsetsCompat.Type.systemBars()
+                    );
 
+                    v.setPadding(
+                            systemBars.left,
+                            systemBars.top,
+                            systemBars.right,
+                            systemBars.bottom
+                    );
+
+                    return insets;
+                });
+
+        ViewCompat.setOnApplyWindowInsetsListener(
+                findViewById(R.id.drawerPanel),
+                (view, insets) -> {
+                    Insets systemBars = insets.getInsets(
+                            WindowInsetsCompat.Type.systemBars()
+                    );
+
+                    view.setPadding(
+                            view.getPaddingLeft(),
+                            systemBars.top,
+                            view.getPaddingRight(),
+                            systemBars.bottom
+                    );
+
+                    return insets;
+                }
+        );
     }
 
     private void cargarActividades() {
@@ -121,11 +151,11 @@ public class MainActivity extends AppCompatActivity {
         contenido.setGravity(android.view.Gravity.CENTER_VERTICAL);
         contenido.setPadding(dp(16), dp(18), dp(16), dp(18));
 
-        TextView icono = new TextView(this);
-        icono.setText(obtenerIconoActividad(actividad.getNombre()));
-        icono.setTextSize(TypedValue.COMPLEX_UNIT_SP, 27);
-        icono.setGravity(android.view.Gravity.CENTER);
-        icono.setBackground(fondoIcono(actividad.getNombre()));
+        ImageView icono = new ImageView(this);
+        icono.setImageResource(R.drawable.ic_hero_squares_2x2);
+        icono.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        icono.setPadding(dp(14), dp(14), dp(14), dp(14));
+        icono.setBackground(fondoIcono());
         LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(dp(56), dp(56));
         iconParams.setMarginEnd(dp(14));
         icono.setLayoutParams(iconParams);
@@ -146,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView descripcion = new TextView(this);
         String detalle = actividad.getDescripcion();
-        descripcion.setText(detalle == null || detalle.trim().isEmpty() ? "Seleccionar método de pago" : detalle);
+        descripcion.setText(detalle == null || detalle.trim().isEmpty() ? "Consultar códigos QR disponibles" : detalle);
         descripcion.setTextColor(ContextCompat.getColor(this, R.color.text_secondary));
         descripcion.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         LinearLayout.LayoutParams descParams = new LinearLayout.LayoutParams(
@@ -177,19 +207,9 @@ public class MainActivity extends AppCompatActivity {
         return tarjeta;
     }
 
-    private String obtenerIconoActividad(String nombre) {
-        String valor = nombre == null ? "" : nombre.toLowerCase(java.util.Locale.ROOT);
-        if (valor.contains("caf")) return "☕";
-        if (valor.contains("libr") || valor.contains("libro")) return "📚";
-        return "🏪";
-    }
-
-    private android.graphics.drawable.Drawable fondoIcono(String nombre) {
-        String valor = nombre == null ? "" : nombre.toLowerCase(java.util.Locale.ROOT);
-        int color = ContextCompat.getColor(this,
-                valor.contains("caf") ? R.color.icon_peach : R.color.icon_lavender);
+    private android.graphics.drawable.Drawable fondoIcono() {
         GradientDrawable fondo = new GradientDrawable();
-        fondo.setColor(color);
+        fondo.setColor(android.graphics.Color.parseColor("#E4F5E9"));
         fondo.setCornerRadius(dp(16));
         return fondo;
     }
@@ -198,20 +218,10 @@ public class MainActivity extends AppCompatActivity {
         return Math.round(valor * getResources().getDisplayMetrics().density);
     }
 
-    private void configurarBotonConfiguracion() {
-        btnConfiguracion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mostrarDialogoPassword();
-            }
-        });
-    }
-
-
     private void configurarMenuLateral() {
 
         btnConfiguracion.setOnClickListener(view ->
-                drawerLayout.openDrawer(navigationView)
+                drawerLayout.openDrawer(drawerPanel)
         );
 
         navigationView.setNavigationItemSelectedListener(item -> {
@@ -219,18 +229,17 @@ public class MainActivity extends AppCompatActivity {
             int id = item.getItemId();
 
             if (id == R.id.nav_inicio) {
-                drawerLayout.closeDrawer(navigationView);
-            }
-            else if (id == R.id.nav_configuracion) {
-                drawerLayout.closeDrawer(navigationView);
+                drawerLayout.closeDrawer(drawerPanel);
 
-                // Conservamos la validación de contraseña existente.
+            } else if (id == R.id.nav_configuracion) {
+                drawerLayout.closeDrawer(drawerPanel);
                 mostrarDialogoPassword();
-            }
-            else if (id == R.id.nav_acerca) {
-                drawerLayout.closeDrawer(navigationView);
+
+            } else if (id == R.id.nav_acerca) {
+                drawerLayout.closeDrawer(drawerPanel);
                 mostrarAcercaDe();
             }
+
             return true;
         });
     }

@@ -1,10 +1,10 @@
 package com.bylaba.containerqr;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.net.Uri;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,16 +36,22 @@ public class MostrarQrActivity extends AppCompatActivity {
 
         View raiz = findViewById(R.id.layoutMostrarQr);
 
-        ViewCompat.setOnApplyWindowInsetsListener(raiz, (v, insets) -> {
+        // Conservamos el padding definido en XML y sumamos los insets del sistema.
+        final int paddingLeft = raiz.getPaddingLeft();
+        final int paddingTop = raiz.getPaddingTop();
+        final int paddingRight = raiz.getPaddingRight();
+        final int paddingBottom = raiz.getPaddingBottom();
+
+        ViewCompat.setOnApplyWindowInsetsListener(raiz, (view, insets) -> {
             Insets barras = insets.getInsets(
                     WindowInsetsCompat.Type.systemBars()
             );
 
-            v.setPadding(
-                    barras.left,
-                    barras.top,
-                    barras.right,
-                    barras.bottom
+            view.setPadding(
+                    paddingLeft + barras.left,
+                    paddingTop + barras.top,
+                    paddingRight + barras.right,
+                    paddingBottom + barras.bottom
             );
 
             return insets;
@@ -60,6 +66,7 @@ public class MostrarQrActivity extends AppCompatActivity {
         recibirDatos();
         buscarQr();
     }
+
     private void recibirDatos() {
         actividadId = getIntent().getIntExtra("actividad_id", -1);
         tipoQrId = getIntent().getIntExtra("tipo_qr_id", -1);
@@ -75,7 +82,7 @@ public class MostrarQrActivity extends AppCompatActivity {
             tipoQrNombre = "Tipo no identificado";
         }
 
-        txtDetalleQr.setText(actividadNombre + " - " + tipoQrNombre);
+        txtDetalleQr.setText(actividadNombre + " · " + tipoQrNombre);
     }
 
     private void buscarQr() {
@@ -83,20 +90,27 @@ public class MostrarQrActivity extends AppCompatActivity {
 
         if (qr == null) {
             imgQr.setVisibility(View.GONE);
-            txtMensajeQr.setText("No hay QR configurado para esta actividad y tipo de pago.");
+            txtMensajeQr.setText("No hay QR configurado para esta actividad y tipo.");
             return;
         }
 
         if (qr.getRutaImagen() == null || qr.getRutaImagen().isEmpty()) {
             imgQr.setVisibility(View.GONE);
-            txtMensajeQr.setText("El QR existe, pero no tiene imagen configurada.");
+            txtMensajeQr.setText("El QR existe, pero todavía no tiene una imagen configurada.");
             return;
         }
 
         try {
-            imgQr.setVisibility(View.VISIBLE);
             imgQr.setImageURI(Uri.parse(qr.getRutaImagen()));
-            txtMensajeQr.setText(qr.getNombre());
+
+            if (imgQr.getDrawable() == null) {
+                imgQr.setVisibility(View.GONE);
+                txtMensajeQr.setText("No se pudo cargar la imagen del QR. Vuelve a configurarla desde Gestión de QR.");
+                return;
+            }
+
+            imgQr.setVisibility(View.VISIBLE);
+            txtMensajeQr.setText(qr.getNombre() == null ? "Código QR disponible" : qr.getNombre());
         } catch (Exception e) {
             imgQr.setVisibility(View.GONE);
             txtMensajeQr.setText("No se pudo cargar la imagen del QR. Vuelve a configurarla desde Gestión de QR.");
