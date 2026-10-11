@@ -20,9 +20,9 @@
         <ImageView
             android:layout_width="52dp"
             android:layout_height="52dp"
-            android:padding="12dp"
+            android:padding="2dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/qr"
+            android:src="@drawable/icon_bylaba_projects"
             app:tint="@color/primary"
             android:background="@drawable/bg_nav_brand_icon"
             android:scaleType="fitCenter" />

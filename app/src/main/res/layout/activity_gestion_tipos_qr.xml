@@ -154,8 +154,8 @@
                 android:backgroundTint="@null"
                 android:text="Cancelar edición"
                 android:textAllCaps="false"
-                android:textColor="@color/text_secondary"
-                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
                 android:visibility="gone" />
         </LinearLayout>
 
