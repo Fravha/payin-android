@@ -6,9 +6,9 @@
     <color name="primary_dark">#106B38</color>
     <color name="surface_app">#F4F7F5</color>
     <color name="surface_card">#FFFFFFFF</color>
-    <color name="text_primary">#172033</color>
+    <color name="text_primary">#202136</color>
     <color name="text_secondary">#68738A</color>
-    <color name="border">#E1E6F0</color>
+    <color name="border">#E8E8F1</color>
     <color name="icon_lavender">#E9EDFF</color>
     <color name="icon_peach">#FFF0E5</color>
 </resources>

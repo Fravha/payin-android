@@ -3,9 +3,10 @@
     android:id="@+id/layoutGestionQrs"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F7F5"
+    android:background="@color/surface_app"
     android:clipToPadding="false"
     android:fillViewport="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="12dp">
 
     <LinearLayout
@@ -17,39 +18,54 @@
         android:paddingEnd="20dp"
         android:paddingBottom="24dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:letterSpacing="0.10"
-            android:text="ADMINISTRACIÓN"
-            android:textColor="#168447"
-            android:textSize="11sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtTituloGestionQrs"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:text="Gestionar código QR"
-            android:textColor="#202136"
-            android:textSize="26sp"
-            android:textStyle="bold" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginBottom="22dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:lineSpacingExtra="3dp"
-            android:text="Asocia una imagen QR a cada actividad y tipo de pago."
-            android:textColor="#777A91"
-            android:textSize="14sp" />
+            <ImageButton
+                android:id="@+id/btnVolver"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_icon_surface"
+                android:src="@drawable/arrow_left"
+                android:scaleType="center"
+                android:padding="12dp"
+                android:contentDescription="Volver"
+                app:tint="@color/primary" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="12dp">
+
+                <TextView
+                    android:id="@+id/txtTituloGestionQrs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gestión de QR"
+                    android:textColor="@color/text_primary"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Asocia imágenes QR a cada actividad y tipo de pago"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_payin_qr_card"
+            android:background="@drawable/bg_card"
             android:elevation="1dp"
             android:orientation="vertical"
             android:padding="17dp">
@@ -58,8 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:text="Configuración del pago"
-                android:textColor="#202136"
+                android:text="Datos del código QR"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -67,8 +83,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:text="Selecciona a qué opción pertenecerá el código."
-                android:textColor="#777A91"
+                android:text="Selecciona la actividad y el tipo de pago correspondiente."
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
 
             <TextView
@@ -76,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:text="Actividad"
-                android:textColor="#55586E"
+                android:textColor="@color/text_secondary"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -85,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="15dp"
-                android:background="@drawable/bg_payin_field"
+                android:background="@drawable/bg_input"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 android:spinnerMode="dropdown" />
@@ -95,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:text="Tipo de QR"
-                android:textColor="#55586E"
+                android:textColor="@color/text_secondary"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -103,7 +119,7 @@
                 android:id="@+id/spinnerTiposQr"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/bg_payin_field"
+                android:background="@drawable/bg_input"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 android:spinnerMode="dropdown" />
@@ -113,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:background="@drawable/bg_payin_qr_card"
+            android:background="@drawable/bg_card"
             android:elevation="1dp"
             android:orientation="vertical"
             android:padding="17dp">
@@ -129,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Imagen del QR"
-                    android:textColor="#202136"
+                    android:textColor="@color/text_primary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -142,7 +158,7 @@
                     android:paddingEnd="10dp"
                     android:paddingBottom="5dp"
                     android:text="VISTA PREVIA"
-                    android:textColor="#106B38"
+                    android:textColor="@color/primary_dark"
                     android:textSize="9sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -152,8 +168,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="15dp"
-                android:text="Carga la imagen que verá el usuario al realizar el pago."
-                android:textColor="#777A91"
+                android:text="Esta es la imagen que verá el usuario al momento de pagar."
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
 
             <FrameLayout
@@ -182,7 +198,7 @@
                 android:minHeight="0dp"
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
-                android:text="＋  Cargar imagen QR"
+                android:text="Cargar imagen QR"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
@@ -214,7 +230,7 @@
                 android:lineSpacingExtra="2dp"
                 android:padding="12dp"
                 android:text="Seleccione una actividad y tipo QR."
-                android:textColor="#106B38"
+                android:textColor="@color/primary_dark"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -223,8 +239,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="Payin  ·  by Bylaba Projects"
-            android:textColor="#777A91"
+            android:text="@string/brand_footer"
+            android:textColor="@color/text_secondary"
             android:textSize="11sp" />
 
     </LinearLayout>

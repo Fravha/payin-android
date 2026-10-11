@@ -68,8 +68,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "('Cafetería', 'Pagos correspondientes a la cafetería', 1);");
 
         db.execSQL("INSERT INTO " + TABLE_TIPOS_QR + " (nombre, descripcion, activo) VALUES " +
-                "('Con factura', 'Pago con emisión de factura', 1), " +
-                "('Sin factura', 'Pago sin emisión de factura', 1);");
+                "('Electronica', 'Pago con emisión de documento electrónico', 1), " +
+                "('Manual', 'Pago con emisión de documento manual', 1);");
 
         db.execSQL("INSERT INTO " + TABLE_CONFIGURACIONES + " (clave, valor) VALUES " +
                 "('password_configuracion', 'admin321');");

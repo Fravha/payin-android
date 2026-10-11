@@ -111,11 +111,11 @@ public class TipoQrActivity extends AppCompatActivity {
         ImageView icono = new ImageView(this);
         icono.setImageResource(R.drawable.qr);
         icono.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        icono.setPadding(dp(11), dp(11), dp(11), dp(11));
+        icono.setPadding(dp(2), dp(2), dp(2), dp(2));
         icono.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_nav_brand_icon));
         icono.setColorFilter(ContextCompat.getColor(this, R.color.primary));
-        LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(dp(48), dp(48));
-        iconParams.setMarginEnd(dp(14));
+        LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(dp(45), dp(45));
+        iconParams.setMarginEnd(dp(10));
         icono.setLayoutParams(iconParams);
         contenido.addView(icono);
 

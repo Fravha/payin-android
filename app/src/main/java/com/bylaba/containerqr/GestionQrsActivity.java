@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.content.Intent;
 
 import androidx.activity.EdgeToEdge;
@@ -54,6 +53,8 @@ public class GestionQrsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_gestion_qrs);
+
+        findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
 
         ViewCompat.setOnApplyWindowInsetsListener(
                 findViewById(R.id.layoutGestionQrs),
@@ -124,10 +125,14 @@ public class GestionQrsActivity extends AppCompatActivity {
                     if (uri != null) {
                         final int takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION;
 
-                        getContentResolver().takePersistableUriPermission(
-                                uri,
-                                Intent.FLAG_GRANT_READ_URI_PERMISSION
-                        );
+                        try {
+                            getContentResolver().takePersistableUriPermission(
+                                    uri,
+                                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                            );
+                        } catch (SecurityException ignored) {
+                            // Algunos proveedores no permiten permisos persistentes.
+                        }
 
                         imagenSeleccionadaUri = uri;
                         imgPreviewQr.setImageURI(uri);
@@ -218,17 +223,17 @@ public class GestionQrsActivity extends AppCompatActivity {
 
     private void guardarQr() {
         if (listaActividades == null || listaActividades.isEmpty()) {
-            Toast.makeText(this, "No hay actividades activas", Toast.LENGTH_SHORT).show();
+            Mensaje.advertencia(this, "No hay actividades activas");
             return;
         }
 
         if (listaTiposQr == null || listaTiposQr.isEmpty()) {
-            Toast.makeText(this, "No hay tipos QR activos", Toast.LENGTH_SHORT).show();
+            Mensaje.advertencia(this, "No hay tipos QR activos");
             return;
         }
 
         if (imagenSeleccionadaUri == null) {
-            Toast.makeText(this, "Selecciona una imagen QR", Toast.LENGTH_SHORT).show();
+            Mensaje.informacion(this, "Selecciona una imagen QR");
             return;
         }
 
@@ -251,10 +256,10 @@ public class GestionQrsActivity extends AppCompatActivity {
         long resultado = qrDAO.guardarOActualizarQr(qr);
 
         if (resultado > 0) {
-            Toast.makeText(this, "QR guardado correctamente", Toast.LENGTH_SHORT).show();
+            Mensaje.exito(this, "QR guardado correctamente");
             txtEstadoQr.setText("QR guardado: " + nombreQr);
         } else {
-            Toast.makeText(this, "No se pudo guardar el QR", Toast.LENGTH_SHORT).show();
+            Mensaje.error(this, "No se pudo guardar el QR");
         }
     }
 }

@@ -244,55 +244,132 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     private void mostrarAcercaDe() {
-        new AlertDialog.Builder(this)
-                .setTitle("ContainerQR")
-                .setMessage(
-                        "Tu solución para organizar códigos QR.\n\n" +
-                                "Versión 1.0\n\n" +
-                                "Desarrollado por: Bylaba Projects\n\n" +
-                                "Una aplicación configurable para gestionar " +
-                                "actividades, tipos de QR e imágenes."
-                )
+        View contenido = getLayoutInflater()
+                .inflate(R.layout.dialogo_acerca_de, null);
+
+        AlertDialog dialogo = new AlertDialog.Builder(this)
+                .setView(contenido)
                 .setPositiveButton("Entendido", (dialog, which) -> {
                     dialog.dismiss();
                 })
-                .show();
+                .create();
+
+        dialogo.setOnShowListener(dialog -> {
+            if (dialogo.getWindow() != null) {
+                dialogo.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+
+                dialogo.getWindow().setDimAmount(0.45f);
+
+                dialogo.getWindow().setLayout(
+                        (int) (getResources().getDisplayMetrics().widthPixels * 0.88f),
+                        android.view.WindowManager.LayoutParams.WRAP_CONTENT
+                );
+            }
+        });
+
+        dialogo.show();
+
+        if (dialogo.getWindow() != null) {
+            dialogo.getWindow().setBackgroundDrawableResource(
+                    android.R.color.transparent
+            );
+
+            dialogo.getWindow().setLayout(
+                    (int) (getResources().getDisplayMetrics().widthPixels * 0.88f),
+                    android.view.WindowManager.LayoutParams.WRAP_CONTENT
+            );
+        }
     }
 
     private void mostrarDialogoPassword() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Acceso a configuración");
-        builder.setMessage("Ingresa la contraseña para continuar");
 
-        final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        input.setHint("Contraseña");
+        View vista = getLayoutInflater().inflate(
+                R.layout.dialogo_password,
+                null
+        );
 
-        builder.setView(input);
+        EditText inputPassword = vista.findViewById(R.id.inputPassword);
+        TextView txtError = vista.findViewById(R.id.txtErrorPassword);
+        TextView btnMostrar = vista.findViewById(R.id.btnMostrarPassword);
+        TextView btnCancelar = vista.findViewById(R.id.btnCancelarPassword);
+        TextView btnIngresar = vista.findViewById(R.id.btnIngresarPassword);
 
-        builder.setPositiveButton("Ingresar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String passwordIngresado = input.getText().toString().trim();
+        AlertDialog dialogo = new AlertDialog.Builder(this)
+                .setView(vista)
+                .create();
 
-                if (configuracionDAO.validarPasswordConfiguracion(passwordIngresado)) {
-                    abrirConfiguracion();
-                } else {
-                    Toast.makeText(MainActivity.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
-                }
+        // Mostrar u ocultar la contraseña
+        btnMostrar.setOnClickListener(v -> {
+            int posicion = inputPassword.getSelectionStart();
+
+            if (inputPassword.getTransformationMethod()
+                    instanceof android.text.method.PasswordTransformationMethod) {
+
+                inputPassword.setTransformationMethod(
+                        android.text.method.HideReturnsTransformationMethod
+                                .getInstance()
+                );
+
+                btnMostrar.setText("Ocultar contraseña");
+
+            } else {
+                inputPassword.setTransformationMethod(
+                        android.text.method.PasswordTransformationMethod
+                                .getInstance()
+                );
+
+                btnMostrar.setText("Mostrar contraseña");
+            }
+
+            inputPassword.setSelection(
+                    Math.max(0, inputPassword.getText().length())
+            );
+        });
+
+        // Cancelar el acceso
+        btnCancelar.setOnClickListener(v -> dialogo.dismiss());
+
+        // Validar la contraseña e ingresar
+        btnIngresar.setOnClickListener(v -> {
+
+            String passwordIngresado = inputPassword.getText()
+                    .toString()
+                    .trim();
+
+            if (passwordIngresado.isEmpty()) {
+                txtError.setText("Ingresa tu contraseña para continuar.");
+                txtError.setVisibility(View.VISIBLE);
+                inputPassword.requestFocus();
+                return;
+            }
+
+            if (configuracionDAO.validarPasswordConfiguracion(
+                    passwordIngresado
+            )) {
+                dialogo.dismiss();
+                abrirConfiguracion();
+
+            } else {
+                txtError.setText("La contraseña es incorrecta.");
+                txtError.setVisibility(View.VISIBLE);
+                inputPassword.setText("");
+                inputPassword.requestFocus();
             }
         });
 
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
+        dialogo.show();
 
-        builder.show();
+        if (dialogo.getWindow() != null) {
+            dialogo.getWindow().setBackgroundDrawableResource(
+                    android.R.color.transparent
+            );
+        }
     }
+
     private void abrirConfiguracion() {
         Intent intent = new Intent(MainActivity.this, ConfigActivity.class);
         startActivity(intent);

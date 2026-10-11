@@ -1,80 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scrollGestionTiposQr"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F7F7">
+    android:background="@color/surface_app"
+    android:fillViewport="true"
+    android:clipToPadding="false">
 
     <LinearLayout
         android:id="@+id/layoutGestionTiposQr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="20dp">
 
-        <TextView
-            android:id="@+id/txtTituloGestionTiposQr"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tipos de QR"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="#222222"
-            android:gravity="center" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginBottom="22dp">
 
-        <TextView
-            android:id="@+id/txtSubtituloGestionTiposQr"
+            <ImageButton
+                android:id="@+id/btnVolver"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_icon_surface"
+                android:src="@drawable/arrow_left"
+                android:scaleType="center"
+                android:padding="12dp"
+                android:contentDescription="Volver"
+                app:tint="@color/primary" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="12dp">
+
+                <TextView
+                    android:id="@+id/txtTituloGestionTiposQr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gestión de tipos QR"
+                    android:textColor="@color/text_primary"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtSubtituloGestionTiposQr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Administra las opciones de pago disponibles"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Administra los tipos de pago disponibles"
-            android:textSize="16sp"
-            android:textColor="#666666"
-            android:gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="24dp" />
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:background="@drawable/bg_card"
+            android:elevation="2dp">
 
-        <TextView
+            <TextView
+                android:id="@+id/txtTituloFormularioTipoQr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nuevo tipo de QR"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Completa los datos para registrar un tipo de pago."
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:layout_marginBottom="18dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre del tipo de QR *"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp" />
+
+            <EditText
+                android:id="@+id/edtNombreTipoQr"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_input"
+                android:hint="Ej. Con factura"
+                android:inputType="textCapWords"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:textSize="14sp"
+                android:singleLine="true"
+                android:layout_marginBottom="14dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descripción"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp" />
+
+            <EditText
+                android:id="@+id/edtDescripcionTipoQr"
+                android:layout_width="match_parent"
+                android:layout_height="88dp"
+                android:background="@drawable/bg_input"
+                android:gravity="top|start"
+                android:hint="Describe brevemente este tipo de pago"
+                android:inputType="textCapSentences|textMultiLine"
+                android:padding="14dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp" />
+
+            <Button
+                android:id="@+id/btnGuardarTipoQr"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_button_primary"
+                android:backgroundTint="@null"
+                android:text="Guardar tipo de QR"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnCancelarEdicion"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_button_secondary"
+                android:backgroundTint="@null"
+                android:text="Cancelar edición"
+                android:textAllCaps="false"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nuevo tipo de QR"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#222222"
-            android:layout_marginBottom="12dp" />
+            android:orientation="vertical"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="12dp">
 
-        <EditText
-            android:id="@+id/edtNombreTipoQr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nombre del tipo de QR"
-            android:inputType="textCapWords"
-            android:layout_marginBottom="12dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tipos de QR registrados"
+                android:textColor="@color/text_primary"
+                android:textSize="19sp"
+                android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edtDescripcionTipoQr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Descripción"
-            android:inputType="textCapSentences"
-            android:layout_marginBottom="12dp" />
-
-        <Button
-            android:id="@+id/btnGuardarTipoQr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Guardar tipo de QR"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            android:layout_marginBottom="24dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tipos registrados"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#222222"
-            android:layout_marginBottom="12dp" />
+            <TextView
+                android:id="@+id/txtResumenTiposQr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Gestiona el estado y los datos de cada tipo de QR."
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/contenedorListaTiposQr"
@@ -82,6 +190,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" />
 
-    </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="12dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="@string/brand_footer"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
+    </LinearLayout>
 </ScrollView>
