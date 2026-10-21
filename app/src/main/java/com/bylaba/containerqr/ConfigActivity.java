@@ -8,9 +8,14 @@ import android.content.Intent;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import android.text.InputType;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AlertDialog;
+
+import com.bylaba.containerqr.database.ConfiguracionDAO;
 
 public class ConfigActivity extends AppCompatActivity {
 
@@ -60,8 +65,147 @@ public class ConfigActivity extends AppCompatActivity {
         btnCambiarPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ConfigActivity.this, "Cambiar contraseña", Toast.LENGTH_SHORT).show();
+                mostrarDialogoCambiarPassword();
             }
         });
+    }
+
+    private void mostrarDialogoCambiarPassword() {
+
+        // Crear los campos de contraseña
+        EditText etPasswordActual = new EditText(this);
+        etPasswordActual.setHint("Contraseña actual");
+        etPasswordActual.setInputType(
+                InputType.TYPE_CLASS_TEXT |
+                        InputType.TYPE_TEXT_VARIATION_PASSWORD
+        );
+
+        EditText etPasswordNueva = new EditText(this);
+        etPasswordNueva.setHint("Nueva contraseña");
+        etPasswordNueva.setInputType(
+                InputType.TYPE_CLASS_TEXT |
+                        InputType.TYPE_TEXT_VARIATION_PASSWORD
+        );
+
+        EditText etConfirmarPassword = new EditText(this);
+        etConfirmarPassword.setHint("Confirmar nueva contraseña");
+        etConfirmarPassword.setInputType(
+                InputType.TYPE_CLASS_TEXT |
+                        InputType.TYPE_TEXT_VARIATION_PASSWORD
+        );
+
+        // Contenedor vertical
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        int padding = (int) (20 * getResources()
+                .getDisplayMetrics().density);
+
+        layout.setPadding(padding, 0, padding, 0);
+
+        layout.addView(etPasswordActual);
+        layout.addView(etPasswordNueva);
+        layout.addView(etConfirmarPassword);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Cambiar contraseña")
+                .setMessage("Introduce tu contraseña actual y la nueva.")
+                .setView(layout)
+                .setNegativeButton("Cancelar", null)
+                .setPositiveButton("Guardar", null)
+                .create();
+
+        dialog.setOnShowListener(d -> {
+
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                    .setOnClickListener(v -> {
+
+                        String actual = etPasswordActual.getText()
+                                .toString();
+
+                        String nueva = etPasswordNueva.getText()
+                                .toString();
+
+                        String confirmar = etConfirmarPassword.getText()
+                                .toString();
+
+                        // Validar campos vacíos
+                        if (actual.isEmpty() ||
+                                nueva.isEmpty() ||
+                                confirmar.isEmpty()) {
+
+                            Toast.makeText(
+                                    this,
+                                    "Completa todos los campos",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+
+                            return;
+                        }
+
+                        // Validar contraseña actual
+                        ConfiguracionDAO dao =
+                                new ConfiguracionDAO(this);
+
+                        if (!dao.validarPasswordConfiguracion(actual)) {
+
+                            etPasswordActual.setError(
+                                    "Contraseña incorrecta"
+                            );
+
+                            etPasswordActual.requestFocus();
+                            return;
+                        }
+
+                        // Evitar una contraseña demasiado corta
+                        if (nueva.length() < 6) {
+
+                            etPasswordNueva.setError(
+                                    "Usa al menos 6 caracteres"
+                            );
+
+                            etPasswordNueva.requestFocus();
+                            return;
+                        }
+
+                        // Confirmar que ambas coincidan
+                        if (!nueva.equals(confirmar)) {
+
+                            etConfirmarPassword.setError(
+                                    "Las contraseñas no coinciden"
+                            );
+
+                            etConfirmarPassword.requestFocus();
+                            return;
+                        }
+
+                        // Guardar en SQLite
+                        int filas = dao.actualizarValor(
+                                "password_configuracion",
+                                nueva
+                        );
+
+                        if (filas > 0) {
+
+                            Toast.makeText(
+                                    this,
+                                    "Contraseña actualizada correctamente",
+                                    Toast.LENGTH_LONG
+                            ).show();
+
+                            dialog.dismiss();
+
+                        } else {
+
+                            Toast.makeText(
+                                    this,
+                                    "No se pudo actualizar la contraseña",
+                                    Toast.LENGTH_LONG
+                            ).show();
+                        }
+                    });
+        });
+
+        dialog.show();
     }
 }
