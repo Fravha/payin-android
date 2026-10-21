@@ -51,9 +51,11 @@ public final class Mensaje {
         TextView txtMensaje = vista.findViewById(R.id.txtMensajeToast);
 
         imgIcono.setImageResource(recursoIcono);
-        imgIcono.setColorFilter(
-                ContextCompat.getColor(context, color)
-        );
+
+        // El parámetro color ya contiene el color ARGB.
+        // No debemos buscarlo como si fuera un recurso.
+        imgIcono.setColorFilter(color);
+
         txtMensaje.setText(mensaje);
 
         Toast toast = new Toast(context.getApplicationContext());
